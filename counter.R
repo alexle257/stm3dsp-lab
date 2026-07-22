@@ -5,7 +5,7 @@ ui <- fluidPage(
   
   sidebarLayout(
     sidebarPanel(
-      actionButton("inc", "Increment"),
+      actionButton("inc", "Increment")
     ),
     
     mainPanel(
@@ -16,13 +16,14 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
-  # TODO: Create reactiveVal to store the count
+  # Task 1: Create reactiveVal to store the count
   counter <- reactiveVal(0)
-  # TODO: Define an observer to update count based on button clicks
-  output$count <- renderText(counter())
+  
+  # Task 2: increase count by 1 each time "Increment" is clicked
+  observeEvent(input$inc, {
+    counter(counter() + 1)
   })
-  # TODO: Render the current count
+  
+  # Task 1: Render the current count
+  output$count <- renderText(counter())
 }
-
-
-shinyApp(ui, server)
